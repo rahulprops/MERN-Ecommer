@@ -9,7 +9,7 @@ const port=process.env.PORT;
  app.use(bodyParser.urlencoded({extended:false}))
  app.use(bodyParser.json())
 //! app lisen
-app.use("/api/v1/user",userRouter)  // => apis/v1/user/registor
+app.use("/api/v1/user",userRouter)  
 app.listen(port,()=>{
     console.log(`server is running on http://localhost:${port}`)
     dbConnect()
