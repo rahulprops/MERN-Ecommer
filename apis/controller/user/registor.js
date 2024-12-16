@@ -64,3 +64,16 @@ export const login= async (req,res)=>{
         return handleError(res,500,false,`server error:${err}`)
     }
 }
+//! all users
+export const allUsers= async (req,res)=>{
+    try{
+        const finduser=await userModal.find().select("-userPassword").sort({createdAt:-1})
+        if(finduser){
+            return handleError(res,200,true,"get all users sucessful",finduser)
+        }else{
+            return handleError(res,400,false,"user find failed")
+        }
+    }catch(err){
+        return handleError(res,500,false,`server error:${err}`)
+    }
+}
