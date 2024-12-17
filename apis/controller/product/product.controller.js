@@ -85,4 +85,46 @@ export const findByIdProduct= async (req,res)=>{
         return handleError(res,500,false,`server error ${err}`)
     }
 }
-
+//! update product by id
+export const updateProdut= async (req,res)=>{
+    const {id}=req.params;
+    if(!id){
+        return handleError(res,400,false,"please enter id")
+    }
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return handleError(res,400,false,"pleaser enter valid id")
+    }
+     if(!req.body){
+        return handleError(res,400,false,"please select update feilds")
+     }
+    try{
+       const updateProduct = await productModal.findByIdAndUpdate(id,req.body,{new:true})
+       if(updateProduct){
+        return handleError(res,200,true,"update product sucessful",updateProduct)
+       }else{
+        return handleError(res,400,false,"update product failed")
+       }
+    }catch(err){
+        return handleError(res,500,false,`server error ${err}`)
+    }
+}
+//! delete product by id
+export const deleteProduct= async (req,res)=>{
+    const {id}=req.params;
+    if(!id){
+        return handleError(res,400,false,"please enter id")
+    }
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return handleError(res,400,false,"please enter valid id")
+    }
+    try{
+        const deleteProductById= await productModal.findByIdAndDelete(id)
+        if(deleteProductById){
+            return handleError(res,200,true,"delete product sucessful")
+        }else{
+            return handleError(res,400,false,"delete product failed")
+        }
+    }catch(err){
+        return handleError(res,500,false,`server error ${err}`)
+    }
+}
