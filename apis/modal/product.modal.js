@@ -10,6 +10,7 @@ const productSchema=new Schema({
         required:[true,"description is required"]
     },
     productImage:{
+        
         type:String,
         required:[true,"image is requied"]
     },
